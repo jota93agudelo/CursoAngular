@@ -27,3 +27,65 @@
     line-height: 50px;
     font-weight: bold;
 }
+
+#nav- ul{
+    margin: 0px;
+    list-style: none;
+    margin-left: 365px;
+    padding-left: 20px;
+}
+
+#nav- ul li{
+    margin-right: 20px;
+    float: left;
+}
+
+#nav- ul li a{
+    color: black;
+    display: block;
+    transition: all 300ms;
+}
+
+#nav- {
+    padding: 25px;
+    padding-top: 0px;
+    margin: 0px;
+    background: lightgrey;
+    align-content: center;
+}
+/* se usa la pseudo clase hover para quitarle el subrayado*/
+#nav- ul li a:hover{
+    text-decoration: none;
+    background: white;
+}
+
+.activado{
+    text-decoration: none !important;
+    /* background: white !important; */
+    border-bottom: 2px solid black;
+}
+
+#footer{
+    margin-top: 50px;
+    border-top: 2px solid #eee;
+    padding-top: 10px;
+    color: gray;
+}
+
+#jumbotron{
+    padding-left: 16px;
+}
+
+#divProducto ul h4{
+    color: gray;
+    text-align: left;
+}
+
+#divProducto ul li{
+    text-align: left;
+}
+
+#form-producto label{
+    margin-top: 10px;
+    
+}

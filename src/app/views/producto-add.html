@@ -2,18 +2,23 @@
 <hr>
 
 
-<form #formProducto="ngForm" class="col-lg-5" id="form-producto" (ngSubmit)="onSubmit()">
-    <label>Nombre:</label>
-    <input type="text" class="form-control " #nombre="ngModel" name="nombre" [(ngModel)]="producto.nombre" required/>
-    <span *ngIf="!nombre.valid && nombre.touched">El nombre es obligatorio</span>
-    <label>Descrpción:</label>
-    <textarea type="text" class="form-control " #descripcion="ngModel" name="descripcion" [(ngModel)]="producto.description" required></textarea>
-    <span *ngIf="!nombre.valid && nombre.touched">El nombre es obligatorio</span>
-    <label>Precio</label>
-    <input type="text" class="form-control " #precio="ngModel" name="precio" [(ngModel)]="producto.precio" required/>
-    <span *ngIf="!nombre.valid && nombre.touched">El nombre es obligatorio</span>
+<form #formProducto="ngForm" class="col-lg-5 container was-validated" id="form-producto" (ngSubmit)="onSubmit()">
+    <label>Nombre:
+            <span *ngIf="!nombre.valid && nombre.touched" class="badge badge-danger">El nombre es obligatorio</span>
+    </label>
+    <input type="text" class="form-control form-control-success" #nombre="ngModel" name="nombre" [(ngModel)]="producto.nombre" required/>
+    <label>Descrpción:
+            <span *ngIf="!descripcion.valid && descripcion.touched" class="badge badge-danger">La descripción es obligatoria</span>
+    </label>
+    <textarea class="form-control " #descripcion="ngModel" name="descripcion" [(ngModel)]="producto.descripcion" required></textarea>
+    <label>Precio:
+        <span *ngIf="!precio.valid && precio.touched" class="badge badge-danger">El precio no es correcto</span>
+    </label>
+    <input type="text" class="form-control " #precio="ngModel" name="precio" [(ngModel)]="producto.precio" required pattern="[0-9]+"/>
     <label>Imágen:</label>
-    <input type="file" class="form-control">
+    <!--se llama al metodo, se le pasa el event para que capture el formulario-->
+    <input type="file" class="form-control" (change)="fileChangeEvent($event)">
     <br>
-    <input type="submit" value="{{titulo}}" class="btn btn-success">
+    <input type="submit" value="{{titulo}}" class="btn btn-success" [disabled]="!formProducto.form.valid">
+    <!--[] es donde se meten los atributos-->
 </form>

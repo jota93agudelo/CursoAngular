@@ -2,13 +2,32 @@
 <hr>
 
 <div *ngIf="productos" id="divProducto">
-    <ul>
-        <h4>PRODUCTOS:</h4>
-        <li *ngFor="let producto of productos" id="id">
-            <strong>{{producto.nombre}} - {{producto.description}}</strong>
-            <p>${{producto.precio}}</p>
-        </li>
-    </ul>
+    <h4>PRODUCTOS:</h4>
+    <hr>
+    <div class="row">
+        <!-- <h4>PRODUCTOS:</h4>
+        <hr>     -->
+        <div class="col-lg-3" *ngFor="let producto of productos" id="id">
+            <div class="card">
+                <div *ngIf="producto.imagen" class="imagen_container">
+                    <img src="http://localhost:8888/curso-angular4-backend/uploads/{{producto.imagen}}" class="producto_imagen"/>
+                </div>
+                <div *ngIf="!producto.imagen">
+                    <div class="imagen_relleno"></div>
+                </div>
+                <br>
+                <div class="caption">
+                    <strong>{{producto.nombre}} - {{producto.description}}</strong>
+                    <p>${{producto.precio}}</p>
+                    <p>
+                        <a [routerLink]="['/producto', producto.id]" class="btn btn-sm btn-info">Ver</a>
+                        <a href="#" class="btn btn-sm btn-secondary">Editar</a>
+                        <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

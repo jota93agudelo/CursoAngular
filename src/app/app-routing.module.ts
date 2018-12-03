@@ -4,12 +4,14 @@ import { HomeComponent } from './components/home.component';
 import { ErrorComponent } from './components/error.component';
 import { ProductosListComponent } from './components/productos-list.component';
 import { ProductoAddComponen } from './components/producto-add.component';
+import { ProductoDetailComponent } from './components/producto-detail.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
   {path:'productos',component:ProductosListComponent},
   {path:'crear-producto',component:ProductoAddComponen},
+  {path:'producto/:id',component:ProductoDetailComponent},
   {path:'**',component:ErrorComponent}
 ];
 

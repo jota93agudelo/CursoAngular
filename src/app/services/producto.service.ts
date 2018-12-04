@@ -19,6 +19,10 @@ export class ProductoService{
         .pipe(map(res=> res.json()));
     }
 
+    getProducto(id){
+        return this._http.get(this.url+'producto/'+id).pipe(map(res=> res.json()));
+    }
+
     addProducto(producto:Producto){
         //se crea variable json para enviar al servicio, se convierte el producto a un string de json
         let json = JSON.stringify(producto);
@@ -26,6 +30,18 @@ export class ProductoService{
         let params = 'json='+json;
         let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded'});
         return this._http.post(this.url+'productos',params,{headers:headers}).pipe(map(resp=> resp.json()));
+    }
+
+    editProducto(id,producto:Producto){
+        let json =JSON.stringify(producto);
+        let params = "json="+json;
+        let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+        return this._http.post(this.url+'update-producto/'+id,params,{headers:headers}).pipe(map(resp=> resp.json()));
+    }
+
+    deleteProducto(id){
+        return this._http.get(this.url+'delete-producto/'+id).pipe(map(res=> res.json()));
     }
 
     makeFileRequest(url: string, params:Array<string>, files: Array<File>){
@@ -52,5 +68,6 @@ export class ProductoService{
             xhr.send(formData);
 
         });
+        
     }
 }

@@ -7,15 +7,19 @@
             <span *ngIf="!nombre.valid && nombre.touched" class="badge badge-danger">El nombre es obligatorio</span>
     </label>
     <input type="text" class="form-control form-control-success" #nombre="ngModel" name="nombre" [(ngModel)]="producto.nombre" required/>
-    <label>Descrpción:
-            <span *ngIf="!descripcion.valid && descripcion.touched" class="badge badge-danger">La descripción es obligatoria</span>
+    <label>Descripción:
+            <span *ngIf="!description.valid && description.touched" class="badge badge-danger">La descripción es obligatoria</span>
     </label>
-    <textarea class="form-control " #descripcion="ngModel" name="descripcion" [(ngModel)]="producto.descripcion" required></textarea>
+    <textarea class="form-control " #description="ngModel" name="description" [(ngModel)]="producto.description" required></textarea>
     <label>Precio:
         <span *ngIf="!precio.valid && precio.touched" class="badge badge-danger">El precio no es correcto</span>
     </label>
     <input type="text" class="form-control " #precio="ngModel" name="precio" [(ngModel)]="producto.precio" required pattern="[0-9]+"/>
     <label>Imágen:</label>
+    <div *ngIf="is_edit">
+            <img src="http://localhost:8888/curso-angular4-backend/uploads/{{producto.imagen}}"  width="60px"/>
+            <hr>
+    </div>
     <!--se llama al metodo, se le pasa el event para que capture el formulario-->
     <input type="file" class="form-control" (change)="fileChangeEvent($event)">
     <br>

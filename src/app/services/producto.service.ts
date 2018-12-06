@@ -1,47 +1,44 @@
 import {Component, Injectable} from '@angular/core';
-import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Http,Response,Headers,RequestOptions} from '@angular/http';
+import {Observable} from 'rxjs';
 import { GLOBAL } from './global';
 import { Producto } from '../models/producto';
-
+import {HttpClient,HttpHeaders} from '@angular/common/http'
 
 @Injectable()
 export class ProductoService{
     public url:string;
 
-    constructor(public _http:Http){
+    constructor(public http:HttpClient){
         this.url=GLOBAL.url;
     }
 
-    getProductos(){
-        return this._http.get(this.url+'productos')
-        .pipe(map(res=> res.json()));
+    getProductos():Observable<any>{
+        return this.http.get(this.url+'productos');
     }
 
-    getProducto(id){
-        return this._http.get(this.url+'producto/'+id).pipe(map(res=> res.json()));
+    getProducto(id):Observable<any>{
+        return this.http.get(this.url+'producto/'+id);
     }
 
-    addProducto(producto:Producto){
+    addProducto(producto:Producto):Observable<any>{
         //se crea variable json para enviar al servicio, se convierte el producto a un string de json
         let json = JSON.stringify(producto);
         // los parametros que se van a enviar y se le concatena el json
         let params = 'json='+json;
-        let headers = new Headers({'Content-type': 'application/x-www-form-urlencoded'});
-        return this._http.post(this.url+'productos',params,{headers:headers}).pipe(map(resp=> resp.json()));
+        let headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded');
+        return this.http.post(this.url+'productos',params,{headers:headers});
     }
 
-    editProducto(id,producto:Producto){
+    editProducto(id,producto:Producto):Observable<any>{
         let json =JSON.stringify(producto);
         let params = "json="+json;
-        let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+        let headers = new HttpHeaders().set('Content-Type','application/x-www-form-urlencoded');
 
-        return this._http.post(this.url+'update-producto/'+id,params,{headers:headers}).pipe(map(resp=> resp.json()));
+        return this.http.post(this.url+'update-producto/'+id,params,{headers:headers});
     }
 
-    deleteProducto(id){
-        return this._http.get(this.url+'delete-producto/'+id).pipe(map(res=> res.json()));
+    deleteProducto(id):Observable<any>{
+        return this.http.get(this.url+'delete-producto/'+id);
     }
 
     makeFileRequest(url: string, params:Array<string>, files: Array<File>){
